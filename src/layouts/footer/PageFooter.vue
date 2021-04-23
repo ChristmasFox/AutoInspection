@@ -1,12 +1,16 @@
 <template>
   <div class="footer">
     <div class="links">
-      <a target="_blank" :key="index" :href="item.link ? item.link : 'javascript: void(0)'" v-for="(item, index) in linkList">
+      <!-- <a target="_blank" :key="index" :href="item.link ? item.link : 'javascript: void(0)'" v-for="(item, index) in linkList">
         <a-icon v-if="item.icon" :type="item.icon"/>{{item.name}}
+      </a> -->
+      <a target="_blank" :key="index" :href="item.link ? item.link : 'javascript: void(0)'" v-for="(item, index) in kdgcList">
+        <a-icon v-if="item.icon" :type="item.icon"/>{{item}}
       </a>
     </div>
     <div class="copyright">
-      Copyright<a-icon type="copyright" />{{copyright}}
+      <!-- Copyright<a-icon type="copyright" />{{copyright}} -->
+      Copyright<a-icon type="copyright" /> 2021 科大国创技术中台PBU出品
     </div>
   </div>
 </template>
@@ -14,7 +18,12 @@
 <script>
 export default {
   name: 'PageFooter',
-  props: ['copyright', 'linkList']
+  props: ['copyright', 'linkList'],
+  data() {
+    return {
+      kdgcList: ['帮助', '隐私', '条款']
+    }
+  },
 }
 </script>
 
