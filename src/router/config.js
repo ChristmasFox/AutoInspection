@@ -1,6 +1,6 @@
 import TabsView from '@/layouts/tabs/TabsView'
 import BlankView from '@/layouts/BlankView'
-// import PageView from '@/layouts/PageView'
+// import PageView from '@/layouts/PageView's
 
 // 路由配置
 const options = {
@@ -21,27 +21,10 @@ const options = {
       component: () => import('@/pages/exception/403'),
     },
     {
-      path: '/detail',
-      name: '详情页',
-      component: TabsView,
-      children: [
-        {
-          path: 'executedetail/:planName',
-          name: '执行详情',
-          component: () => import('@/components/detail/ExecuteDetail'),
-        },
-        {
-          path: 'reportdetail/:planName',
-          name: '报告',
-          component: () => import('@/components/detail/ReportDetail'),
-        },
-      ]
-    },
-    {
       path: '/',
       name: '首页',
       component: TabsView,
-      redirect: '/login',
+      redirect: '/inspection/home',
       children: [
         {
           path: 'inspection',
@@ -70,6 +53,32 @@ const options = {
               path: 'history',
               name: '执行历史',
               component: () => import('@/pages/inspection/history'),
+            },
+            {
+              path: 'details',
+              name: '详情',
+              component: BlankView,
+              meta: {
+                invisible: true
+              },
+              children: [
+                {
+                  path: 'executedetail/:planName',
+                  name: '执行详情',
+                  meta: {
+                    invisible: true
+                  },
+                  component: () => import('@/pages/inspection/details/ExecuteDetail'),
+                },
+                {
+                  path: 'reportdetail/:planName',
+                  name: '报告',
+                  meta: {
+                    invisible: true
+                  },
+                  component: () => import('@/pages/inspection/details/ReportDetail'),
+                },
+              ]
             }
           ]
         },

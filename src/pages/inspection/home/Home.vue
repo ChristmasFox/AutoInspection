@@ -8,7 +8,7 @@
           <a-tooltip title="巡检计划总数" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
-          <a-icon type="hdd" theme="twoTone" slot="iconItem"/>
+          <a-icon type="hdd" theme="twoTone" slot="iconItem" style="font-size: 50px"/>
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6">
@@ -17,7 +17,7 @@
           <a-tooltip title="主机总数" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
-          <a-icon type="gold" theme="twoTone" slot="iconItem"/>
+          <a-icon type="gold" theme="twoTone" slot="iconItem" style="font-size: 50px"/>
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6">
@@ -26,7 +26,7 @@
           <a-tooltip title="成功总数" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
-      <a-icon type="schedule" theme="twoTone" slot="iconItem" twoToneColor="#00cc00"/>
+      <a-icon type="schedule" theme="twoTone" slot="iconItem" style="font-size: 50px" twoToneColor="#00cc00"/>
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6">
@@ -35,7 +35,7 @@
           <a-tooltip title="失败总数" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
-          <a-icon type="warning" theme="twoTone" slot="iconItem" twoToneColor="#ff0000"/>
+          <a-icon type="warning" theme="twoTone" slot="iconItem" style="font-size: 50px" twoToneColor="#ff0000"/>
         </chart-card>
       </a-col>
     </a-row>
@@ -48,7 +48,7 @@
             <a-range-picker :style="{width: '256px'}"></a-range-picker>
           </div>
           <a-tab-pane loading="true" tab='' key="1">
-              <div id="resultBar" style="width: auto;height: 400px"></div>
+              <div id="resultBar" style="width: 80%;height: 400px"></div>
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -62,7 +62,7 @@
             <a-range-picker :style="{width: '256px'}"></a-range-picker>
           </div>
           <a-tab-pane loading="true" tab='' key="1">
-             <div id="successRateBar" style="width: auto;height: 400px"></div>
+             <div id="successRateBar" style="width: 80%;height: 400px"></div>
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -154,6 +154,9 @@ export default {
     this.echartsInit()
     formatSuccRateData(this.dataList.successRateData)
   },
+  updated() {
+    this.echartsInit()
+  },
   methods: {
     echartsInit() {
       // 任务结果柱状图
@@ -197,7 +200,7 @@ export default {
           }
         ]
       }),
-      
+
       // 成功率趋势折线图
       this.$echarts.init(document.getElementById('successRateBar')).setOption({
         title: {

@@ -16,7 +16,7 @@
             <a-tooltip title="巡检资源数" slot="action">
               <a-icon type="info-circle-o" />
             </a-tooltip>
-            <a-icon type="gold" theme="twoTone" slot="iconItem" />
+            <a-icon type="gold" theme="twoTone" slot="iconItem" style="font-size: 50px" />
           </chart-card>
         </a-col>
         <a-col :sm="24" :md="12" :xl="6">
@@ -25,7 +25,7 @@
             <a-tooltip title="巡检指标数" slot="action">
               <a-icon type="info-circle-o" />
             </a-tooltip>
-            <a-icon type="hdd" theme="twoTone" slot="iconItem" />
+            <a-icon type="hdd" theme="twoTone" slot="iconItem" style="font-size: 50px" />
           </chart-card>
         </a-col>
         <a-col :sm="24" :md="12" :xl="6">
@@ -34,7 +34,7 @@
             <a-tooltip title="巡检异常数" slot="action">
               <a-icon type="info-circle-o" />
             </a-tooltip>
-            <a-icon type="warning" theme="twoTone" slot="iconItem" twoToneColor="#ff0000"/>
+            <a-icon type="warning" theme="twoTone" slot="iconItem" style="font-size: 50px" twoToneColor="#ff0000"/>
           </chart-card>
         </a-col>
         <a-col :sm="24" :md="12" :xl="6">
@@ -43,8 +43,9 @@
             <a-tooltip title="巡检正常率" slot="action">
               <a-icon type="info-circle-o" />
             </a-tooltip>
-            <a-icon type="safety-certificate" theme="twoTone" slot="iconItem" twoToneColor="#00cc00" />
-            
+            <!-- <a-icon type="safety-certificate" theme="twoTone" slot="iconItem" twoToneColor="#00cc00" /> -->
+            <a-progress type="circle" :percent="totalData.normalRate.replace(/%/g, '')" 
+            :width="50" slot="iconItem" :showInfo="false" strokeWidth="15" />
           </chart-card>
         </a-col>
       </a-card>
@@ -69,7 +70,7 @@
                 <tr class="lastrow">
                   <td>{{item.itemList[0].resultList[0].checkResult}}</td>
                   <td>{{item.itemList[0].resultList[0].normalRange}}</td>
-                  <td class="lastCol">{{item.itemList[0].resultList[0].itemState}}</td>
+                  <td :class="item.itemList[0].resultList[0].itemState === '正常' ? 'lastCol normal' : 'lastCol error'">{{item.itemList[0].resultList[0].itemState}}</td>
                 </tr>
               </table>
             </td>
@@ -83,7 +84,7 @@
                 <tr class="lastrow">
                   <td>{{item.itemList[1].resultList[0].checkResult}}</td>
                   <td>{{item.itemList[1].resultList[0].normalRange}}</td>
-                  <td class="lastCol">{{item.itemList[1].resultList[0].itemState}}</td>
+                  <td :class="item.itemList[1].resultList[0].itemState === '正常' ? 'lastCol normal' : 'lastCol error'">{{item.itemList[1].resultList[0].itemState}}</td>
                 </tr>
               </table>
             </td>
@@ -97,7 +98,7 @@
                 <tr class="lastrow">
                   <td>{{item.itemList[2].resultList[0].checkResult}}</td>
                   <td>{{item.itemList[2].resultList[0].normalRange}}</td>
-                  <td class="lastCol">{{item.itemList[2].resultList[0].itemState}}</td>
+                  <td :class="item.itemList[2].resultList[0].itemState === '正常' ? 'lastCol normal' : 'lastCol error'">{{item.itemList[2].resultList[0].itemState}}</td>
                 </tr>
               </table>
             </td>
@@ -182,4 +183,10 @@ export default {
     margin-bottom: 5px;
   }
 
+  .normal {
+    color: blue;
+  }
+  .error {
+    color: #ff0000;
+  }
 </style>

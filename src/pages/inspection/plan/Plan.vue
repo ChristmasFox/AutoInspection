@@ -65,6 +65,13 @@
         @selectedRowChange="onSelectChange"
         rowKey="planName"
       >
+        <!-- 巡检状态 -->
+        <div slot="state" slot-scope="text">
+          <div class="stateStyle">
+            <span :class="text.text === '关闭' ? 'dot close' : 'dot running'"></span> 
+            <span>{{text.text}}</span>
+          </div>
+        </div>
         <!-- 操作 -->
         <div slot="action" slot-scope="{}">
           <a style="margin-right: 8px">
@@ -82,7 +89,7 @@
 
     <!-- 隐藏的对话框 -->
     <!-- 添加计划对话框 -->
-    <a-modal v-model="addPlanVisible" title="添加计划" @ok="handleAddPlanOk" width='1000px'>
+    <a-modal v-model="addPlanVisible" title="添加计划" @ok="handleAddPlanOk" width='900px'>
       <a-form-model :model="addPlanForm" :label-col="labelCol" :wrapper-col="wrapperCol">
           <a-card>
             <a-row >
@@ -130,18 +137,10 @@
               :target-keys="targetKeys"
               :selected-keys="selectedKeys"
               :render="item => item.title"
-              :disabled="disabled"
               @change="handleChange"
               @selectChange="handleSelectChange"
               @scroll="handleScroll"
             />
-            <a-switch
-              un-checked-children="enabled"
-              checked-children="disabled"
-              :checked="disabled"
-              style="margin-top: 16px"
-              @change="handleDisable"
-            />    
           </a-card>
           
       </a-form-model>
@@ -170,7 +169,8 @@ const columns = [
   },
   {
     title: '巡检状态',
-    dataIndex: 'checkState'
+    dataIndex: 'checkState',
+    scopedSlots: { customRender: 'state' }
   },
   {
     title: '创建时间',
@@ -199,7 +199,6 @@ export default {
       mockData: [],
       targetKeys: [],
       selectedKeys: [],
-      disabled: false,
       addPlanVisible: false,
       // 假数据
       modelList: [{"id":1,"name":"主机CPU、MEM模板-v202104141538"},{"id":2,"name":"主机CPU、MEM模板-v202104141539"},{"id":3,"name":"主机CPU、MEM模板-v202104141540"}],
@@ -301,9 +300,6 @@ export default {
       console.log('direction:', direction);
       console.log('target:', e.target);
     },
-    handleDisable(disabled) {
-      this.disabled = disabled;
-    },
 
     // 把 hostList 的键 id 和 name 替换成 key 和 title 并将 key 的键值转成字符串 方便使用 Ant Design of Vue
     letIdToKey(data) {
@@ -328,7 +324,7 @@ export default {
     margin: 0 auto;
   }
   .ant-transfer-list {
-    width: 400px;
+    width: 350px;
   }
   .search{
     margin-bottom: 54px;
@@ -344,5 +340,26 @@ export default {
     .fold {
       width: 100%;
     }
+  }
+
+  .ant-col-4 {
+    width: 100px;
+    text-align: center;
+  }
+  .stateStyle {
+    display: flex;
+    align-items: center;
+  }
+  .dot {
+    display: inline-block;
+    padding: 2px;
+    margin: 2px 5px 0 5px;
+    border-radius: 50%;
+  }
+  .close {
+    background-color: #ff0000;
+  }
+  .running {
+    background-color: #00ee00;
   }
 </style>

@@ -74,7 +74,7 @@ export default {
     height: 100px;
   }
   .chart-card-content .iconImage {
-    font-size: 50px;
+    // font-size: 50px;
     margin-left: 10px;
   }
 </style>

@@ -18,11 +18,11 @@ const routerMap = {
     redirect: '/login',
     component: view.tabs
   },
-  detail: {
-    path: '/detail',
-    name: '详情页',
-    component: view.tabs,
-  },
+  // detail: {
+  //   path: '/detail',
+  //   name: '详情页',
+  //   component: view.tabs,
+  // },
   exception: {
     name: '异常页',
     icon: 'warning',

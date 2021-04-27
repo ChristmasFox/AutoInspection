@@ -189,11 +189,11 @@ export default {
     },
     handleToExecutedetail(record) {
       console.log(record)
-      this.$router.push(`/detail/executedetail/${record.planName}`)
+      this.$router.push(`/inspection/details/executedetail/${record.planName}`)
     },
     handleToReportdetail(record) {
       console.log(record)
-      this.$router.push(`/detail/reportdetail/${record.planName}`)
+      this.$router.push(`/inspection/details/reportdetail/${record.planName}`)
     }
     // 添加计划对话框 控制
     // showAddPlanModal() {
