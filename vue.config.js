@@ -45,6 +45,8 @@ module.exports = {
     //     }
     //   }
     // }
+    // host: '127.0.0.1',
+    // port: 8080,
   },
   pluginOptions: {
     'style-resources-loader': {
@@ -110,7 +112,7 @@ module.exports = {
       }
     }
   },
-  publicPath: process.env.VUE_APP_PUBLIC_PATH,
+  publicPath: './',
   outputDir: 'dist',
   assetsDir: 'static',
   productionSourceMap: false

@@ -7,13 +7,15 @@
         <slot name="action"></slot>
       </span>
       </div>
-      <div class="total"><span>{{total}}</span></div>
+      
     </div>
     <div class="chart-card-content">
-      <div class="content-fix">
-        <slot></slot>
+      <div class="iconImage">
+        <slot name="iconItem"></slot>
       </div>
+      <div class="total"><span>{{total}}</span></div>
     </div>
+    <a-progress :percent="100" status="active" :show-info="false"/>
     <div class="chart-card-footer">
       <slot name="footer"></slot>
     </div>
@@ -54,6 +56,7 @@ export default {
     white-space: nowrap;
     margin-top: 4px;
     margin-bottom: 0;
+    margin-right: 20px;
     font-size: 30px;
     line-height: 38px;
     height: 38px;
@@ -64,15 +67,14 @@ export default {
     margin-top: 8px;
   }
   .chart-card-content{
-    margin-bottom: 12px;
-    position: relative;
-    height: 46px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
+    height: 100px;
   }
-  .chart-card-content .content-fix{
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+  .chart-card-content .iconImage {
+    // font-size: 50px;
+    margin-left: 10px;
   }
 </style>

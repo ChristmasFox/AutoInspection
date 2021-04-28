@@ -1,9 +1,9 @@
 <template>
   <a-dropdown>
-    <div class="header-avatar" style="cursor: pointer">
+    <!-- <div class="header-avatar" style="cursor: pointer">
       <a-avatar class="avatar" size="small" shape="circle" :src="user.avatar"/>
       <span class="name">{{user.name}}</span>
-    </div>
+    </div> -->
     <a-menu :class="['avatar-menu']" slot="overlay">
       <a-menu-item>
         <a-icon type="user" />

@@ -32,7 +32,8 @@
       </a-spin>
     </div>
     <span @click="fetchNotice" class="header-notice">
-      <a-badge class="notice-badge" count="12">
+      <!-- 红色气泡提示框 -->
+      <a-badge class="notice-badge" count="0">
         <a-icon :class="['header-notice-icon']" type="bell" />
       </a-badge>
     </span>
