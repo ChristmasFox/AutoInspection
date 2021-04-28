@@ -47,8 +47,8 @@
           <div class="extra-wrap" slot="tabBarExtraContent">
             <a-range-picker :style="{width: '256px'}"></a-range-picker>
           </div>
-          <a-tab-pane loading="true" tab='' key="1">
-              <div id="resultBar" style="width: 80%;height: 400px"></div>
+          <a-tab-pane :loading="loading" tab='' key="1">
+              <div id="resultBar" style="height: 400px"></div>
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -61,8 +61,8 @@
           <div class="extra-wrap" slot="tabBarExtraContent">
             <a-range-picker :style="{width: '256px'}"></a-range-picker>
           </div>
-          <a-tab-pane loading="true" tab='' key="1">
-             <div id="successRateBar" style="width: 80%;height: 400px"></div>
+          <a-tab-pane :loading="loading" tab='' key="1">
+             <div id="successRateBar" style="height: 400px"></div>
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -144,23 +144,30 @@ export default {
           }
         ]
       },
-      loading: false,
+      loading: true,
     }
   },
   create() {
-    setTimeout(() => this.loading = !this.loading, 1000);
+
   },
   mounted() {
-    this.echartsInit()
     formatSuccRateData(this.dataList.successRateData)
-  },
-  updated() {
-    this.echartsInit()
+    new Promise((resolve) => {
+      setTimeout(() => {
+        this.loading = !this.loading
+        resolve()
+      }, 500);
+    }).then(() => {
+      //	此dom为echarts图标展示dom
+      this.echartsInit()
+    })
+
   },
   methods: {
     echartsInit() {
       // 任务结果柱状图
-      this.$echarts.init(document.getElementById('resultBar')).setOption({
+      var resBarChart = this.$echarts.init(document.getElementById('resultBar'))
+      resBarChart.setOption({
         title: {
             text: '任务结果柱状图',
         },
@@ -174,11 +181,10 @@ export default {
             data: ['成功', '失败']
         },
         grid: {
-            left: '10%',
-            right: '10%',
+            // left: '10%',
+            // right: '10%',
             bottom: '3%',
             containLabel: true,
-            width: '80%'
         },
         yAxis: {
             type: 'value',
@@ -200,9 +206,14 @@ export default {
           }
         ]
       }),
+      window.addEventListener('resize', function(){
+        resBarChart.resize()
+      })
+    
 
       // 成功率趋势折线图
-      this.$echarts.init(document.getElementById('successRateBar')).setOption({
+      var sucRateBarChart = this.$echarts.init(document.getElementById('successRateBar'))
+      sucRateBarChart.setOption({
         title: {
             text: '成功率趋势图',
         },
@@ -234,6 +245,10 @@ export default {
           },
         ]
       })
+      window.addEventListener('resize', function(){
+        sucRateBarChart.resize()
+      })
+        
     },
   },
 }

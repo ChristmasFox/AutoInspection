@@ -24,7 +24,6 @@ Vue.use(Viser)
 Vue.use(Plugins)
 
 bootstrap({router, store, i18n, message: Vue.prototype.$message})
-
 new Vue({
   router,
   store,
